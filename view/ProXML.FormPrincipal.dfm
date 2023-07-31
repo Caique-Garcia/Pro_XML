@@ -31,10 +31,6 @@ object FormPrincipal: TFormPrincipal
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitLeft = 312
-    ExplicitTop = 224
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object PnlCabecalho: TPanel
       Left = 0
       Top = 0
@@ -62,7 +58,7 @@ object FormPrincipal: TFormPrincipal
           Left = 0
           Top = 0
           Width = 499
-          Height = 30
+          Height = 37
           Align = alTop
           Caption = 'Pro XML'
           Font.Charset = DEFAULT_CHARSET
@@ -71,11 +67,12 @@ object FormPrincipal: TFormPrincipal
           Font.Name = 'Segoe UI'
           Font.Style = []
           ParentFont = False
+          ExplicitWidth = 100
         end
         object Label2: TLabel
           AlignWithMargins = True
           Left = 0
-          Top = 40
+          Top = 47
           Width = 499
           Height = 13
           Margins.Left = 0
@@ -94,6 +91,7 @@ object FormPrincipal: TFormPrincipal
           Font.Style = []
           ParentColor = False
           ParentFont = False
+          ExplicitTop = 40
           ExplicitWidth = 482
         end
       end
@@ -116,10 +114,6 @@ object FormPrincipal: TFormPrincipal
           Width = 152
           Height = 117
           Align = alClient
-          ExplicitLeft = 56
-          ExplicitTop = 56
-          ExplicitWidth = 50
-          ExplicitHeight = 50
           Data = {
             7B2276223A22342E382E30222C226D657461223A7B2267223A224C6F74746965
             46696C657320414520332E302E32222C2261223A22222C226B223A22222C2264
@@ -920,10 +914,6 @@ object FormPrincipal: TFormPrincipal
       Padding.Right = 30
       Padding.Bottom = 15
       TabOrder = 1
-      ExplicitLeft = 208
-      ExplicitTop = 304
-      ExplicitWidth = 185
-      ExplicitHeight = 41
       object PnlInfo: TPanel
         Left = 482
         Top = 15
@@ -948,7 +938,6 @@ object FormPrincipal: TFormPrincipal
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitTop = 166
           object Panel2: TPanel
             Left = 0
             Top = 0
@@ -957,7 +946,6 @@ object FormPrincipal: TFormPrincipal
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 0
-            ExplicitTop = 6
             object SkSvg4: TSkSvg
               AlignWithMargins = True
               Left = 10
@@ -997,10 +985,6 @@ object FormPrincipal: TFormPrincipal
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 1
-            ExplicitLeft = 112
-            ExplicitTop = 24
-            ExplicitWidth = 185
-            ExplicitHeight = 41
             object Label6: TLabel
               Left = 0
               Top = 0
@@ -1041,8 +1025,6 @@ object FormPrincipal: TFormPrincipal
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitLeft = 3
-          ExplicitTop = 74
           object Panel1: TPanel
             Left = 0
             Top = 0
@@ -1051,7 +1033,6 @@ object FormPrincipal: TFormPrincipal
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 0
-            ExplicitLeft = 8
             object SkSvg3: TSkSvg
               AlignWithMargins = True
               Left = 10
@@ -1097,10 +1078,6 @@ object FormPrincipal: TFormPrincipal
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 1
-            ExplicitLeft = 112
-            ExplicitTop = 24
-            ExplicitWidth = 185
-            ExplicitHeight = 41
             object Label5: TLabel
               Left = 0
               Top = 0
@@ -1141,8 +1118,6 @@ object FormPrincipal: TFormPrincipal
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 2
-          ExplicitLeft = 3
-          ExplicitTop = -6
           object PanelIMGValorTotal: TPanel
             Left = 0
             Top = 0
@@ -1151,8 +1126,6 @@ object FormPrincipal: TFormPrincipal
             Align = alLeft
             BevelOuter = bvNone
             TabOrder = 0
-            ExplicitLeft = 3
-            ExplicitTop = -6
             object SkSvg2: TSkSvg
               AlignWithMargins = True
               Left = 10
@@ -1188,10 +1161,6 @@ object FormPrincipal: TFormPrincipal
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 1
-            ExplicitLeft = 112
-            ExplicitTop = 24
-            ExplicitWidth = 185
-            ExplicitHeight = 41
             object Label3: TLabel
               Left = 0
               Top = 0
@@ -1240,9 +1209,6 @@ object FormPrincipal: TFormPrincipal
         Color = clWhite
         ParentBackground = False
         TabOrder = 1
-        ExplicitLeft = 226
-        ExplicitTop = 6
-        ExplicitWidth = 185
         object PnlInfoLocal: TPanel
           Left = 0
           Top = 0
@@ -1300,9 +1266,6 @@ object FormPrincipal: TFormPrincipal
             Align = alBottom
             BevelOuter = bvNone
             TabOrder = 1
-            ExplicitLeft = 256
-            ExplicitTop = 168
-            ExplicitWidth = 185
             object PnlBtnGO: TPanel
               AlignWithMargins = True
               Left = 320
@@ -1348,6 +1311,7 @@ object FormPrincipal: TFormPrincipal
                 Font.Name = 'Segoe UI'
                 Font.Style = []
                 ParentFont = False
+                OnClick = SpeedButton1Click
                 ExplicitLeft = 32
                 ExplicitWidth = 23
                 ExplicitHeight = 22

@@ -2,7 +2,8 @@ program ProXML;
 
 uses
   Vcl.Forms,
-  ProXML.FormPrincipal in 'view\ProXML.FormPrincipal.pas' {FormPrincipal};
+  ProXML.FormPrincipal in 'view\ProXML.FormPrincipal.pas' {FormPrincipal},
+  uCalculadoraXML in 'lib\uCalculadoraXML.pas';
 
 {$R *.res}
 

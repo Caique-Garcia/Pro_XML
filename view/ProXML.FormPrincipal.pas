@@ -47,6 +47,7 @@ type
     SkSvg3: TSkSvg;
     SkSvg4: TSkSvg;
     procedure SkSvg1Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -58,13 +59,33 @@ var
 
 implementation
 
+uses
+  uCalculadoraXML;
+
 {$R *.dfm}
 
 procedure TFormPrincipal.SkSvg1Click(Sender: TObject);
 begin
   //Selecionando a pasta de arquivos
   FileOpenDialog1.Execute;
-  EditCaminho.Text := FileOpenDialog1.FileName ;
+  EditCaminho.Text := FileOpenDialog1.FileName;
+end;
+
+procedure TFormPrincipal.SpeedButton1Click(Sender: TObject);
+var
+  CalculadoraXML : TCalculadoraXML;
+begin
+  CalculadoraXML:=  TCalculadoraXML.Create;
+  try
+    CalculadoraXML.CaminhoDiretorio := EditCaminho.Text;
+    CalculadoraXML.ProcessarXMLs;
+    LabelValorTotal.Caption := 'R$ ' + CalculadoraXML.ValorTotal;
+    LabelbaseICMS.Caption := 'R$ ' + CalculadoraXML.ValorBaseICMS;
+    LabelValorICMS.Caption := 'R$ ' + CalculadoraXML.ValorICMS;
+  finally
+    CalculadoraXML.Free;
+  end;
+
 end;
 
 end.
