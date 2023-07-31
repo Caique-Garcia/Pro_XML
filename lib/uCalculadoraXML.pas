@@ -45,8 +45,9 @@ var
 begin
   //Processar XMLS no diretorio
   //Pegando arquivos e jogando num array de nomes de arquivos
-  ShowMessage(CaminhoDiretorio);
+
   files := TDirectory.GetFiles(CaminhoDiretorio + '\', '*.xml');
+  //ShowMessage(CaminhoDiretorio + '\' + '*.xml');
 
   //Rodando o array de Caminhos do XML
   for I := 0 to Length(files)-1 do
@@ -54,6 +55,7 @@ begin
     doc := TXMLDocument.Create(nil);
     doc.LoadFromFile(files[i]);
 
+    ShowMessage(files[i]); //Sistema pega o caminho do arquivo
     node := doc.DocumentElement;
     ValorTotal := Inttostr(StrToint(ValorTotal) + StrToint(node.Attributes['vNF'].Value));
 
