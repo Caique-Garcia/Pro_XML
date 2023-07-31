@@ -39,9 +39,8 @@ var
   dir: TDirectory;
   files: TArray<string>;
   doc: TXMLDocument;
-  node: IXMLNode;
+  node: TXMLNode;
   i: integer;
-
 begin
   //Processar XMLS no diretorio
   //Pegando arquivos e jogando num array de nomes de arquivos
@@ -56,15 +55,11 @@ begin
     doc.LoadFromFile(files[i]);
 
     ShowMessage(files[i]); //Sistema pega o caminho do arquivo
-    node := doc.DocumentElement;
-    ValorTotal := Inttostr(StrToint(ValorTotal) + StrToint(node.Attributes['vNF'].Value));
+    //node := doc.DocumentElement;
+    //ValorTotal := Inttostr(StrToint(ValorTotal) + StrToint(node.Attributes['vNF'].Value));
 
     doc.free;
   end;
-
-
-
-
 
 end;
 
