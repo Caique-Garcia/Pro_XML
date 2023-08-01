@@ -46,6 +46,7 @@ type
     SkSvg2: TSkSvg;
     SkSvg3: TSkSvg;
     SkSvg4: TSkSvg;
+    Memo1: TMemo;
     procedure SkSvg1Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
   private
@@ -80,7 +81,7 @@ begin
     CalculadoraXML.CaminhoDiretorio := EditCaminho.Text;
     CalculadoraXML.ProcessarXMLs;
 
-    LabelValorTotal.Caption := 'R$ ' + CalculadoraXML.ValorTotal;
+    //LabelValorTotal.Caption := 'R$ ' + CalculadoraXML.ValorTotal;
     //LabelbaseICMS.Caption := 'R$ ' + CalculadoraXML.ValorBaseICMS;
     //LabelValorICMS.Caption := 'R$ ' + CalculadoraXML.ValorICMS;
   finally

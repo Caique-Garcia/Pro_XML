@@ -21,8 +21,12 @@ type
     property ValorBaseICMS : String read FValorBaseICMS write SetValorBaseICMS;
     property CaminhoDiretorio : String read FCaminhoDiretorio write SetCaminhoDiretorio;
     procedure ProcessarXMLs;
-    procedure GetTagValueFromXML(const FileName, TagName: string; var TagValue: string);
+    procedure GetTagValueFromXML(var CaminhoXML: string);
   end;
+
+  var
+     AValorTotal: String;
+
 
 implementation
 
@@ -32,34 +36,29 @@ uses
   Xml.XMLDoc,
   System.IOUtils,
   System.SysUtils,
-  Vcl.Dialogs;
+  Vcl.Dialogs, ProXML.FormPrincipal;
 
 { TCalculadoraXML }
 
-procedure TCalculadoraXML.GetTagValueFromXML(const FileName, TagName: string;
-  var TagValue: string);
+procedure TCalculadoraXML.GetTagValueFromXML(var CaminhoXML: string);
   var
-    XMLDocument: TXMLDocument;
+    XMLDocument: IXMLDocument;
     NodeinfNFe: IXMLNode;
-    AValor: OleVariant;
-    BValor: String;
+    BValorString: String;
 begin
-
-  XMLDocument := TXMLDocument.Create(nil);
+   XMLDocument := TXMLDocument.Create(Nil);
   try
-    XMLDocument.LoadFromFile(FileName);
+    //Aqui carregamos o arquivo XML no objeto XMLDocument
+    XMLDocument.LoadFromFile(CaminhoXML);
+
+    //Aqui Selecionamos e recuperando o valor da tag(nó)
     NodeinfNFe := XMLDocument.ChildNodes.FindNode('nfeProc').ChildNodes.FindNode('NFe').ChildNodes.FindNode('infNFe');
-    // Aqui, navegamos pelos nós do XML
-    TagValue := NodeinfNFe.ChildNodes.FindNode('ide').ChildValues['nNF'];
-    AValor := NodeinfNFe.ChildNodes.FindNode('total').ChildNodes.FindNode('ICMSTot').ChildValues['vNF'];
+    BValorString := NodeinfNFe.ChildNodes.FindNode('ide').ChildValues['nNF'];
 
-    BValor := AValor;
-    ValorTotal := BValor;
-    ShowMessage(BValor);
-
+    //Aqui exibimos os resultados
+    FormPrincipal.Memo1.Lines.Add(BValorString);
   finally
-
-    //FreeAndNil(XMLDocument);
+    //XMLDocument.Free;
   end;
 end;
 
@@ -67,19 +66,34 @@ procedure TCalculadoraXML.ProcessarXMLs;
 var
   files: TArray<string>;
   i: integer;
-  TagValue: string;
 begin
   //Processar XMLS no diretorio
   //Pegando arquivos e jogando num array de nomes de arquivos
   files := TDirectory.GetFiles(CaminhoDiretorio + '\', '*.xml');
-  //ShowMessage(CaminhoDiretorio + '\' + '*.xml');
-  TagValue:= '';
-  //Rodando o array de Caminhos do XML
-  for  i := Length(files)-1 downto 0 do
-  begin
-     GetTagValueFromXML(files[i],'cUF',TagValue);
 
-  end;
+    //Passando pelo Arraay com os nomes dos XMLs
+    for  i := 0 to High(files) do
+    begin
+        ////Aqui executamos a função que lê o arquivo XML
+        GetTagValueFromXML(files[i]);
+
+        //Aqui selecionamos o valor de uma das tags/nos do XMl
+        //NodeinfNFe := XMLDocument.ChildNodes.FindNode('nfeProc').ChildNodes.FindNode('NFe').ChildNodes.FindNode('infNFe');
+
+        //Aqui Recuperando valor total no xml da nota
+        // XMLDocument.LoadFromFile(Files[i]);
+        // AValor := XMLDocument
+        // .ChildNodes.FindNode('nfeProc')
+        // .ChildNodes.FindNode('NFe')
+        // .ChildNodes.FindNode('infNFe')
+        // .ChildNodes.FindNode('total')
+        // .ChildNodes.FindNode('ICMSTot')
+        // .ChildValues['vNF'];
+
+        //Aqui somamos e convertemos os valores dessa tag
+        //BValor := BValor + (AValor/100);
+        //Valortotal := FloatToStrF(BValor, ffFixed, 15, 2);
+    end;
 
 end;
 

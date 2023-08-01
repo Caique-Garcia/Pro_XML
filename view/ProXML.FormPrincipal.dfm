@@ -1317,6 +1317,13 @@ object FormPrincipal: TFormPrincipal
               end
             end
           end
+          object Memo1: TMemo
+            Left = 40
+            Top = 80
+            Width = 385
+            Height = 89
+            TabOrder = 2
+          end
         end
       end
     end
