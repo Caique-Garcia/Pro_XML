@@ -32,8 +32,7 @@ uses
   Xml.XMLDoc,
   System.IOUtils,
   System.SysUtils,
-  Vcl.Dialogs,
-  System.Variants;
+  Vcl.Dialogs;
 
 { TCalculadoraXML }
 
