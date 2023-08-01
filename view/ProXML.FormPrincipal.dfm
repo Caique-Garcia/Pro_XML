@@ -91,7 +91,6 @@ object FormPrincipal: TFormPrincipal
           Font.Style = []
           ParentColor = False
           ParentFont = False
-          ExplicitTop = 40
           ExplicitWidth = 482
         end
       end

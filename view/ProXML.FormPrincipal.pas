@@ -79,9 +79,10 @@ begin
   try
     CalculadoraXML.CaminhoDiretorio := EditCaminho.Text;
     CalculadoraXML.ProcessarXMLs;
-    LabelValorTotal.Caption := 'R$ ' + CalculadoraXML.ValorTotal;
-    LabelbaseICMS.Caption := 'R$ ' + CalculadoraXML.ValorBaseICMS;
-    LabelValorICMS.Caption := 'R$ ' + CalculadoraXML.ValorICMS;
+
+    //LabelValorTotal.Caption := 'R$ ' + CalculadoraXML.ValorTotal;
+    //LabelbaseICMS.Caption := 'R$ ' + CalculadoraXML.ValorBaseICMS;
+    //LabelValorICMS.Caption := 'R$ ' + CalculadoraXML.ValorICMS;
   finally
     CalculadoraXML.Free;
   end;

@@ -21,6 +21,7 @@ type
     property ValorBaseICMS : String read FValorBaseICMS write SetValorBaseICMS;
     property CaminhoDiretorio : String read FCaminhoDiretorio write SetCaminhoDiretorio;
     procedure ProcessarXMLs;
+    procedure GetTagValueFromXML(const FileName, TagName: string; var TagValue: string);
   end;
 
 implementation
@@ -34,31 +35,45 @@ uses
 
 { TCalculadoraXML }
 
+procedure TCalculadoraXML.GetTagValueFromXML(const FileName, TagName: string;
+  var TagValue: string);
+  var
+    XMLDocument: TXMLDocument;
+    NodeinfNFe: IXMLNode;
+begin
+
+  XMLDocument := TXMLDocument.Create(nil);
+  try
+    XMLDocument.LoadFromFile(FileName);
+    NodeinfNFe := XMLDocument.ChildNodes.FindNode('nfeProc').ChildNodes.FindNode('NFe').ChildNodes.FindNode('infNFe');
+    // Aqui, navegamos pelos nós do XML
+    TagValue := NodeinfNFe.ChildNodes.FindNode('ide').ChildValues['nNF'];
+
+
+    ShowMessage(TagValue);
+
+  finally
+
+    //FreeAndNil(XMLDocument);
+  end;
+end;
+
 procedure TCalculadoraXML.ProcessarXMLs;
 var
-  dir: TDirectory;
   files: TArray<string>;
-  doc: TXMLDocument;
-  node: TXMLNode;
   i: integer;
+  TagValue: string;
 begin
   //Processar XMLS no diretorio
   //Pegando arquivos e jogando num array de nomes de arquivos
-
   files := TDirectory.GetFiles(CaminhoDiretorio + '\', '*.xml');
   //ShowMessage(CaminhoDiretorio + '\' + '*.xml');
-
+  TagValue:= '';
   //Rodando o array de Caminhos do XML
-  for I := 0 to Length(files)-1 do
+  for  i := Length(files)-1 downto 0 do
   begin
-    doc := TXMLDocument.Create(nil);
-    doc.LoadFromFile(files[i]);
+     GetTagValueFromXML(files[i],'cUF',TagValue);
 
-    ShowMessage(files[i]); //Sistema pega o caminho do arquivo
-    //node := doc.DocumentElement;
-    //ValorTotal := Inttostr(StrToint(ValorTotal) + StrToint(node.Attributes['vNF'].Value));
-
-    doc.free;
   end;
 
 end;
