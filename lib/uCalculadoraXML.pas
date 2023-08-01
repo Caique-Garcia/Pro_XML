@@ -31,7 +31,9 @@ uses
   Xml.XMLIntf,
   Xml.XMLDoc,
   System.IOUtils,
-  System.SysUtils, Vcl.Dialogs;
+  System.SysUtils,
+  Vcl.Dialogs,
+  System.Variants;
 
 { TCalculadoraXML }
 
@@ -40,6 +42,8 @@ procedure TCalculadoraXML.GetTagValueFromXML(const FileName, TagName: string;
   var
     XMLDocument: TXMLDocument;
     NodeinfNFe: IXMLNode;
+    AValor: OleVariant;
+    BValor: String;
 begin
 
   XMLDocument := TXMLDocument.Create(nil);
@@ -48,9 +52,11 @@ begin
     NodeinfNFe := XMLDocument.ChildNodes.FindNode('nfeProc').ChildNodes.FindNode('NFe').ChildNodes.FindNode('infNFe');
     // Aqui, navegamos pelos nós do XML
     TagValue := NodeinfNFe.ChildNodes.FindNode('ide').ChildValues['nNF'];
+    AValor := NodeinfNFe.ChildNodes.FindNode('total').ChildNodes.FindNode('ICMSTot').ChildValues['vNF'];
 
-
-    ShowMessage(TagValue);
+    BValor := AValor;
+    ValorTotal := BValor;
+    ShowMessage(BValor);
 
   finally
 
