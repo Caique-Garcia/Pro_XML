@@ -9,14 +9,17 @@ type
     FValorBaseICMS: String;
     FValorICMS: String;
     FCaminhoDiretorio: String;
+    FValorTotalFloat: Double;
     procedure SetValorTotal(const Value: String);
     procedure SetValorBaseICMS(const Value: String);
     procedure SetValorICMS(const Value: String);
     procedure SetCaminhoDiretorio(const Value: String);
+    procedure SetValorTotalFloat(const Value: Double);
 
 
   public
     property ValorTotal : String read FValorTotal write SetValorTotal;
+    property ValorTotalFloat : Double read FValorTotalFloat Write SetValorTotalFloat;
     property ValorICMS : String read FValorICMS write SetValorICMS;
     property ValorBaseICMS : String read FValorBaseICMS write SetValorBaseICMS;
     property CaminhoDiretorio : String read FCaminhoDiretorio write SetCaminhoDiretorio;
@@ -26,6 +29,7 @@ type
 
   var
      AValorTotal: String;
+     ContadorXML, ContadorXMLErro: Integer;
 
 
 implementation
@@ -45,7 +49,9 @@ procedure TCalculadoraXML.GetTagValueFromXML(var CaminhoXML: string);
     XMLDocument: IXMLDocument;
     NodeinfNFe: IXMLNode;
     BValorString: String;
+    AValorFloat, BValorFloat: Double;
 begin
+
    XMLDocument := TXMLDocument.Create(Nil);
   try
     //Aqui carregamos o arquivo XML no objeto XMLDocument
@@ -53,7 +59,15 @@ begin
 
     //Aqui Selecionamos e recuperando o valor da tag(nó)
     NodeinfNFe := XMLDocument.ChildNodes.FindNode('nfeProc').ChildNodes.FindNode('NFe').ChildNodes.FindNode('infNFe');
-    BValorString := NodeinfNFe.ChildNodes.FindNode('ide').ChildValues['nNF'];
+    AValorFloat := NodeinfNFe.ChildNodes.FindNode('total').ChildNodes.FindNode('ICMSTot').ChildValues['vNF'];
+
+
+    ContadorXML := ContadorXML + 1;
+    BValorFloat := AValorFloat/100;
+    BValorString := FloatToStrF(BValorFloat, ffFixed, 15, 2);
+
+    //Aqui Vamos passar pra variavel global o valor somado
+    ValorTotalFloat := ValorTotalFloat + BValorFloat;
 
     //Aqui exibimos os resultados
     FormPrincipal.Memo1.Lines.Add(BValorString);
@@ -66,7 +80,9 @@ procedure TCalculadoraXML.ProcessarXMLs;
 var
   files: TArray<string>;
   i: integer;
+  AValorTotal: String;
 begin
+  ValorTotal := '0.00';
   //Processar XMLS no diretorio
   //Pegando arquivos e jogando num array de nomes de arquivos
   files := TDirectory.GetFiles(CaminhoDiretorio + '\', '*.xml');
@@ -77,24 +93,12 @@ begin
         ////Aqui executamos a função que lê o arquivo XML
         GetTagValueFromXML(files[i]);
 
-        //Aqui selecionamos o valor de uma das tags/nos do XMl
-        //NodeinfNFe := XMLDocument.ChildNodes.FindNode('nfeProc').ChildNodes.FindNode('NFe').ChildNodes.FindNode('infNFe');
-
-        //Aqui Recuperando valor total no xml da nota
-        // XMLDocument.LoadFromFile(Files[i]);
-        // AValor := XMLDocument
-        // .ChildNodes.FindNode('nfeProc')
-        // .ChildNodes.FindNode('NFe')
-        // .ChildNodes.FindNode('infNFe')
-        // .ChildNodes.FindNode('total')
-        // .ChildNodes.FindNode('ICMSTot')
-        // .ChildValues['vNF'];
-
-        //Aqui somamos e convertemos os valores dessa tag
-        //BValor := BValor + (AValor/100);
-        //Valortotal := FloatToStrF(BValor, ffFixed, 15, 2);
     end;
 
+    AValortotal := FloatToStrF(ValorTotalFloat, ffFixed, 15, 2);
+    //Aqui vamos exibir a Soma
+    FormPrincipal.LabelValorTotal.Caption := 'R$ ' +AValorTotal;
+    FormPrincipal.Memo1.Lines.Add('Foram processasdos ' + IntToSTr(ContadorXML) + ' Arquivos XMLs')
 end;
 
 procedure TCalculadoraXML.SetCaminhoDiretorio(const Value: String);
@@ -115,6 +119,11 @@ end;
 procedure TCalculadoraXML.SetValorTotal(const Value: String);
 begin
   FValorTotal := Value;
+end;
+
+procedure TCalculadoraXML.SetValorTotalFloat(const Value: Double);
+begin
+  FValorTotalFloat := Value;
 end;
 
 end.

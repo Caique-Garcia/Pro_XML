@@ -1318,10 +1318,19 @@ object FormPrincipal: TFormPrincipal
             end
           end
           object Memo1: TMemo
-            Left = 40
+            Left = 24
             Top = 80
-            Width = 385
-            Height = 89
+            Width = 401
+            Height = 113
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BorderStyle = bsNone
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = 5258295
+            Font.Height = -13
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
             TabOrder = 2
           end
         end
