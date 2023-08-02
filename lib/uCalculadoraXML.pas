@@ -64,8 +64,14 @@ begin
     NodeIde := XMLDocument.ChildNodes.FindNode('nfeProc').ChildNodes.FindNode('NFe').ChildNodes.FindNode('infNFe').ChildNodes.FindNode('ide');
     NumeroNF := NodeIde.ChildValues['nNF'];
 
+    //Aqui vamos tentar pegar o Valor da Tag de Autorização
     NodeprotNFe := XMLDocument.ChildNodes.FindNode('nfeProc').ChildNodes.FindNode('protNFe');
-    TagAutorizado := NodeprotNFe.ChildNodes.FindNode('infProt').ChildValues['xMotivo'];
+    try
+      TagAutorizado := NodeprotNFe.ChildNodes.FindNode('infProt').ChildValues['xMotivo'];
+    except
+      //Caso não consiga atribui nulo
+      TagAutorizado := '';
+    end;
 
 
     //Aqui vamos verificar se existe a tag de autorização no XML
@@ -104,7 +110,7 @@ begin
     begin
       // Aqui executamos caso o XMl não tenha a tag de autorização
       ContadorXMLErro := ContadorXMLErro +1;
-      FormPrincipal.Memo1.Lines.Add(NumeroNF + ' - XML sem tag Autorização');
+      FormPrincipal.Memo1.Lines.Add(NumeroNF + ' - XML sem Tag de Autorização');
     end;
 
   finally
