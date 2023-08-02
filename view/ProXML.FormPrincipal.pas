@@ -81,14 +81,16 @@ begin
   GifCarregando.Visible := not GifCarregando.Visible;
   SpeedButton1.Enabled := false;
 
+
   CalculadoraXML:=  TCalculadoraXML.Create;
   try
-    CalculadoraXML.CaminhoDiretorio := EditCaminho.Text;
-    CalculadoraXML.ProcessarXMLs;
 
-    //LabelValorTotal.Caption := 'R$ ' + CalculadoraXML.ValorTotal;
-    //LabelbaseICMS.Caption := 'R$ ' + CalculadoraXML.ValorBaseICMS;
-    //LabelValorICMS.Caption := 'R$ ' + CalculadoraXML.ValorICMS;
+    if EditCaminho.Text <> '' then
+    begin
+      CalculadoraXML.CaminhoDiretorio := EditCaminho.Text;
+      CalculadoraXML.ProcessarXMLs;
+    end;
+    
   finally
     CalculadoraXML.Free;
   end;
