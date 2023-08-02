@@ -110,7 +110,7 @@ begin
     begin
       // Aqui executamos caso o XMl não tenha a tag de autorização
       ContadorXMLErro := ContadorXMLErro +1;
-      FormPrincipal.Memo1.Lines.Add(NumeroNF + ' - XML sem Tag de Autorização');
+      FormPrincipal.Memo1.Lines.Add('NFCe ' +NumeroNF + ' - XML sem Tag de Autorização');
     end;
 
   finally
@@ -124,6 +124,11 @@ var
   i: integer;
   AValorTotal, AValorTotalBC, AValorTotalICMS: String;
 begin
+  ValorTotalFloat:= 0.00;
+  ValorTotalBCFloat:= 0.00;
+  ValorTotalICMSFloat:= 0.00;
+  ContadorXML:= 0;
+
   ValorTotal := '0.00';
   //Processar XMLS no diretorio
   //Pegando arquivos e jogando num array de nomes de arquivos

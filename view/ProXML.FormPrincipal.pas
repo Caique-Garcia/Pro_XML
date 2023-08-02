@@ -80,7 +80,7 @@ var
 begin
   GifCarregando.Visible := not GifCarregando.Visible;
   SpeedButton1.Enabled := false;
-
+  Memo1.Lines.Clear;
 
   CalculadoraXML:=  TCalculadoraXML.Create;
   try
