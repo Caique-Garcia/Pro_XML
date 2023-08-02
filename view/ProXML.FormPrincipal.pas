@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Skia,
-  Skia.Vcl, Vcl.FileCtrl, Vcl.Buttons;
+  Skia.Vcl, Vcl.FileCtrl, Vcl.Buttons, Vcl.Imaging.pngimage;
 
 type
   TFormPrincipal = class(TForm)
@@ -15,7 +15,6 @@ type
     PnlInfo: TPanel;
     PnlLocal: TPanel;
     PnlLogo: TPanel;
-    Label1: TLabel;
     Label2: TLabel;
     PnlImg: TPanel;
     PnlInfoLocal: TPanel;
@@ -47,6 +46,8 @@ type
     SkSvg3: TSkSvg;
     SkSvg4: TSkSvg;
     Memo1: TMemo;
+    GifCarregando: TSkAnimatedImage;
+    Image1: TImage;
     procedure SkSvg1Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
   private
@@ -75,7 +76,11 @@ end;
 procedure TFormPrincipal.SpeedButton1Click(Sender: TObject);
 var
   CalculadoraXML : TCalculadoraXML;
+
 begin
+  GifCarregando.Visible := not GifCarregando.Visible;
+  SpeedButton1.Enabled := false;
+
   CalculadoraXML:=  TCalculadoraXML.Create;
   try
     CalculadoraXML.CaminhoDiretorio := EditCaminho.Text;
@@ -88,6 +93,8 @@ begin
     CalculadoraXML.Free;
   end;
 
+  GifCarregando.Visible := not GifCarregando.Visible;
+  SpeedButton1.Enabled := true;
 end;
 
 end.
